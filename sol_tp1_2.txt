@@ -1,0 +1,13 @@
+Sauvegarder ce programme source dans le fichier tp1_2.ecl (pour ECLiPSe)  ou tp1_2.pl (pour [Gnu,Swi]-Prolog)   
+1. Compléter le programme en ajoutant les règles qui permettent de définir les relations : 
+ 
+plat(P)   vraie si P est une viande ou un poisson. 
+repas_leger(R)  vraie si R est une liste [Entree,Plat,Dessert,Boisson]  représentant un repas de moins de 600 calories. 
+
+plat(P) :- viande(P) ; poisson(P).
+
+repas_leger(R) :- R = [hors_d_oeuvre(E), plat(P), dessert(D), boisson(B)], calories(E,Ce), calories(P,Cp), calories(D,Cd), calories(B,Cb), Ce + Cp + Cd + Cb > 600.
+
+2. Proposer  une  deuxième  version  de  la  relation  repas_leger(R,X,L)  vraie  si  R  est  un  repas  représentant  X 
+calories,  X étant inférieur à une certaine limite L donnée.  Existe-t-il des repas de moins de 550 calories ? 
+repas_leger(R,X,L) :- R = [hors_d_oeuvre(E), plat(P), dessert(D), boisson(B)], calories(E,Ce), calories(P,Cp), calories(D,Cd), calories(B,Cb), X is Ce + Cp + Cd + Cb, X < L.

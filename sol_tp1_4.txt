@@ -1,0 +1,33 @@
+1. Définir en 2 clauses (clause d’arrêt et clause de récursion) le prédicat somme(+L,?S). A l’appel, le premier argument 
+est  nécessairement  connu  (instancié)  ;  le  second,  qui  représente  le  résultat  du  calcul  peut  être  libre  ou  instancié  ; 
+exemples : 
+
+
+2. On donne une autre version de ce prédicat 
+somme2([],   S,S). 
+somme2([X|L],I,S) :- 
+ J is X+I, 
+ somme2(L,J,S).
+ 
+ Quelles sont les réponses aux requêtes suivantes :
+ 
+ somme2([1,2,3,4], 0, S).
+ la somme de la list commence pour 0 donc
+ S = 10
+ 
+ somme2([1,2,3,4], 0, 9). 
+ false
+ 
+ somme2([1,2,3,4], 123, S). 
+ S = 133
+ 
+ somme2([1,2,3,4], 0, 10).
+ true
+
+somme2([],0,S)
+some2([1|2,3,4],0,S) :-
+ J is 1+0
+ somme2([2|3,4],1,S).
+ 
+ 3. Quelles  différences  existe-t-il  entre  les  algorithmes  sous-jacents  aux  deux  versions  ?  Quels  sont  les  avantages  et 
+inconvénients respectifs de chaque version ? 

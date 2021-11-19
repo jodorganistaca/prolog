@@ -1,0 +1,31 @@
+1. Expliquer la présence du coupe-choix (!) dans la 1ère clause du programme. 
+Il permet, lors de l'évaluation d'une clause, d'indiquer que l'on ne souhaite pas évaluer les autres clauses pour ne garder que la clause courante.
+c'est pour n'ai pas evaluer les autres clauses parce que c'est le case base donc le programme doit fini
+2. Concevoir une nouvelle version du programme qui évite l'usage du coupe-choix. 
+fact2(X,FAC) :- X=0 -> FAC=1; X2 is X-1, 
+ fact2(X2,FAC2), 
+ FAC is X*FAC2.
+ 
+POPLOG Prolog allows for a simple form of "conditional statement" in
+Prolog programs. The goal:
+
+    ?- X -> Y; Z.
+    
+https://www.cs.bham.ac.uk/research/projects/poplog/doc/prologhelp/conditional
+3. Comparer les deux versions (avantages/ inconvénients) sur la requête : 
+fact(-10,F).
+?- fact(-10,F).
+ERROR: Stack limit (1.0Gb) exceeded
+ERROR:   Stack sizes: local: 0.9Gb, global: 77.8Mb, trail: 0Kb
+ERROR:   Stack depth: 10,189,261, last-call: 0%, Choice points: 3
+ERROR:   Possible non-terminating recursion:
+ERROR:     [10,189,261] user:fact(-10189261, _20401552)
+ERROR:     [10,189,260] user:fact(-10189260, _20401572)
+?- fact2(-10,F).
+ERROR: Stack limit (1.0Gb) exceeded
+ERROR:   Stack sizes: local: 0.9Gb, global: 72.3Mb, trail: 0Kb
+ERROR:   Stack depth: 9,471,639, last-call: 0%, Choice points: 3
+ERROR:   Possible non-terminating recursion:
+ERROR:     [9,471,639] user:fact2(-9471639, _18944344)
+ERROR:     [9,471,638] user:fact2(-9471638, _18944364)
+

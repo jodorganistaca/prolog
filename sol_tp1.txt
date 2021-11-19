@@ -1,0 +1,45 @@
+1. Sauvegarder ce programme source dans le fichier tp1_1.ecl (pour ECLiPSe)  ou tp1_1.pl (pour Gnu Prolog ou 
+Swi Prolog). Lancer Prolog, puis compiler le fichier source avec  la commande : 
+consult(tp1_1). 
+
+warning: singleton variables [Age,Profession,Ville] for pere/2
+
+2. Indiquer les réponses aux questions suivantes dans le compte-rendu : 
+ Pourquoi la clause définissant le prédicat pere/2 est-elle responsable d’un warning ? 
+Parce que il y a singleton variables [Age,Profession,Ville] 
+ Quelle solution est apportée dans la clause qui définit fille/2 ? (que signifie le symbole '_' en Prolog ?) 
+ca signifie une variable anonyme nommée _ que sera determine pour la definition de les clausules en ce case le Age Profession et la Ville
+ Quelles requêtes Prolog doit-on formuler pour déterminer : 
+ les personnes domiciliées à Nice ? 
+personneNice(X) :- personne(X,_,_,_,nice).
+ les personnes qui habitent dans la même ville que leurs deux parents ? 
+habitentMemeVille(X) :- personne(X,_,_,_,Ville), parent(P,X), personne(P, _,_,_,Ville).
+ (joindre les réponses aux requêtes dans le compte-rendu) 
+| ?- personneNice(X).
+
+X = edouard ? a
+
+X = agathe
+
+X = octave
+
+3. Compléter le programme en ajoutant les règles qui permettent de définir les prédicats mere/2 et fils/2.
+mere(Mere, Enfant) :- 
+ personne(Mere, femme, _, _, _), 
+ parent(Mere, Enfant). 
+ 
+fils(Fils, Parent) :- 
+ personne(Fils, homme, _, _, _), 
+ parent(Parent, Fils).
+ 
+4. On soumet la requête suivante : 
+?- parent(P,E), personne(E,_,_,ecolier,_).
+Quel est le sens de cette requête ?
+
+Les parents P del Enfant E ou l'enfant est un ecolier.
+
+5. On désire ajouter une nouvelle règle définissant la relation parent_d_ecolier(P) vraie  ssi P a un enfant  écolier.  
+On  souhaite  obtenir  tous  les  noms  des  personnes  qui  ont  un  enfant  écolier  mais  une  seule  fois  chaque  nom
+parent_ecolier(P) :- personne(P,_,_,_,_), once((parent(P,E), personne(E,_,_,ecolier,_))).
+
+
